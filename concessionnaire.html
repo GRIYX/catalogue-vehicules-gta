@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concessionnaire GTA RP - Catalogue</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* bg-gray-900 */
+            color: #f3f4f6; /* text-gray-100 */
+        }
+        /* Style pour la scrollbar de la modale (optionnel mais améliore l'esthétique) */
+        .modal-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .modal-scrollbar::-webkit-scrollbar-track {
+            background: #374151; /* bg-gray-700 */
+            border-radius: 10px;
+        }
+        .modal-scrollbar::-webkit-scrollbar-thumb {
+            background: #5c8df6; /* bg-purple-500 */
+            border-radius: 10px;
+        }
+        .modal-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #7c3aed; /* bg-purple-600 */
+        }
+        .stat-bar-bg {
+            background-color: #374151; /* bg-gray-700 */
+        }
+        .stat-bar-fill {
+            transition: width 0.7s ease-in-out;
+            background-color: #8b5cf6; /* bg-purple-500 */
+            height: 100%;
+            border-radius: 0.25rem; /* rounded-sm */
+        }
+        .image-placeholder {
+            background-color: #374151; /* bg-gray-700 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af; /* text-gray-400 */
+        }
+        .image-placeholder ion-icon {
+            font-size: 4rem; /* text-6xl */
+        }
+        /* Custom checkbox style */
+        .custom-checkbox:checked {
+            background-color: #8b5cf6; /* bg-purple-500 */
+            border-color: #8b5cf6; /* border-purple-500 */
+        }
+        .custom-checkbox:checked:hover {
+            background-color: #7c3aed; /* bg-purple-600 */
+            border-color: #7c3aed; /* border-purple-600 */
+        }
+        .custom-checkbox:focus {
+            ring: #8b5cf6; /* ring-purple-500 */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-gray-800 shadow-xl sticky top-0 z-40">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <h1 id="dealership-name" class="text-2xl sm:text-3xl font-bold text-blue-400 hover:text-blue-300 transition-colors cursor-pointer">
+                    Mosley Car
+                </h1>
+                </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <div class="text-center mb-10">
+            <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                Notre Catalogue de Véhicules
+            </h2>
+            <p class="mt-2 text-lg text-gray-400">Découvrez notre sélection exclusive.</p>
+        </div>
+
+        <section id="filters" class="mb-10 p-6 bg-gray-800 rounded-xl shadow-2xl">
+            <h3 class="text-xl font-semibold mb-6 text-purple-300 border-b border-gray-700 pb-2">Affiner votre recherche</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4">
+                <div>
+                    <label for="filter-brand" class="block text-sm font-medium text-gray-300 mb-1">Marque :</label>
+                    <select id="filter-brand" class="w-full py-2.5 px-3 border border-gray-600 bg-gray-700 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white transition-all">
+                        <option value="">Toutes les marques</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="filter-type" class="block text-sm font-medium text-gray-300 mb-1">Type :</label>
+                    <select id="filter-type" class="w-full py-2.5 px-3 border border-gray-600 bg-gray-700 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white transition-all">
+                        <option value="">Tous les types</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="sort-by" class="block text-sm font-medium text-gray-300 mb-1">Trier par :</label>
+                    <select id="sort-by" class="w-full py-2.5 px-3 border border-gray-600 bg-gray-700 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white transition-all">
+                        <option value="default">Par défaut</option>
+                        <option value="name-asc">Nom (A-Z)</option>
+                        <option value="name-desc">Nom (Z-A)</option>
+                        <option value="price-asc">Prix (Bas &gt; Haut)</option>
+                        <option value="price-desc">Prix (Haut &gt; Bas)</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="search-term" class="block text-sm font-medium text-gray-300 mb-1">Rechercher :</label>
+                    <input type="text" id="search-term" placeholder="Rechercher un véhicule..." class="w-full py-2.5 px-3 border border-gray-600 bg-gray-700 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white transition-all placeholder-gray-400">
+                </div>
+            </div>
+        </section>
+
+        <section id="vehicle-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+            <p id="no-results" class="hidden col-span-full text-center text-gray-400 text-xl py-10">Aucun véhicule ne correspond à vos critères.</p>
+        </section>
+    </main>
+
+    <div id="vehicle-modal" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center p-4 hidden z-50 transition-opacity duration-300 opacity-0">
+        <div class="bg-gray-800 shadow-2xl rounded-xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden border border-gray-700">
+            <div class="flex justify-between items-center p-4 sm:p-6 border-b border-gray-700">
+                <h4 id="modal-vehicle-name" class="text-xl sm:text-2xl font-bold text-purple-400">Nom du Véhicule</h4>
+                <button id="close-modal" class="text-gray-400 hover:text-purple-400 transition-colors text-3xl leading-none">&times;</button>
+            </div>
+            <div id="modal-content" class="p-4 sm:p-6 space-y-6 overflow-y-auto modal-scrollbar">
+                </div>
+             <div class="p-4 sm:p-6 border-t border-gray-700 bg-gray-800/50">
+                <button class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+                    Contacter un vendeur pour ce véhicule
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800/50 mt-16 border-t border-gray-700">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-gray-400">
+            <p>&copy; <span id="current-year"></span> <span id="footer-dealership-name">VotreConcessionnaire RP</span>. Tous droits réservés.</p>
+            <p class="text-sm mt-1">Ce site est un prototype pour un serveur GTA RP.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA ---
+        const vehiclesData = [
+            {
+                id: 1,
+                nom: "Pegassi Zentorno",
+                marque: "Pegassi",
+                type: "Super Sportive",
+                prix: 725000,
+                image: "https://placehold.co/600x400/7C3AED/FFFFFF?text=Zentorno", // Purple background, white text
+                description: "La Zentorno est une supercar emblématique, connue pour son design agressif et ses performances de pointe. Un choix parfait pour ceux qui veulent se démarquer.",
+                statistiques: { vitesseMax: 92, acceleration: 95, freinage: 80, tenueDeRoute: 88 },
+                customisations: [
+                    { nom: "Peinture Principale", options: ["Noir Mat", "Rouge Vif", "Bleu Électrique", "Blanc Perle"], coutAdditionnel: 15000 },
+                    { nom: "Jantes Custom", options: ["Modèle 'Inferno'", "Modèle 'Shadow'", "Modèle 'Stance'"], coutAdditionnel: 25000 },
+                    { nom: "Kit Carrosserie Large", options: ["Niveau 1", "Niveau 2"], coutAdditionnel: 60000 },
+                    { nom: "Aileron Carbone", options: ["Sport", "Course"], coutAdditionnel: 35000 },
+                    { nom: "Suspensions Rabaissées", options: ["Sport", "Compétition"], coutAdditionnel: 20000 },
+                    { nom: "Moteur Amélioré", options: ["Stage 3"], coutAdditionnel: 150000 }
+                ],
+                galerie: [ // Galerie d'images pour la modale
+                    "https://placehold.co/800x500/7C3AED/FFFFFF?text=Zentorno+Vue+1",
+                    "https://placehold.co/800x500/6D28D9/FFFFFF?text=Zentorno+Vue+2",
+                    "https://placehold.co/800x500/5B21B6/FFFFFF?text=Zentorno+Vue+3",
+                ]
+            },
+            {
+                id: 2,
+                nom: "Benefactor Schlagen GT",
+                marque: "Benefactor",
+                type: "Sportive",
+                prix: 1300000,
+                image: "https://placehold.co/600x400/10B981/FFFFFF?text=Schlagen+GT", // Emerald background
+                description: "Élégante et puissante, la Schlagen GT combine luxe et performance. Son moteur rugissant et ses lignes fluides ne manqueront pas de faire tourner les têtes.",
+                statistiques: { vitesseMax: 88, acceleration: 90, freinage: 82, tenueDeRoute: 85 },
+                customisations: [
+                    { nom: "Couleur Signature", options: ["Vert Émeraude", "Gris Nardo", "Argent Métallisé"], coutAdditionnel: 20000 },
+                    { nom: "Intérieur Cuir", options: ["Beige", "Noir Alcantara"], coutAdditionnel: 45000 },
+                    { nom: "Échappement Sport", options: ["Titane", "Chromé"], coutAdditionnel: 30000 }
+                ],
+                galerie: [
+                    "https://placehold.co/800x500/10B981/FFFFFF?text=Schlagen+GT+Vue+1",
+                    "https://placehold.co/800x500/059669/FFFFFF?text=Schlagen+GT+Vue+2",
+                ]
+            },
+            {
+                id: 3,
+                nom: "Grotti Itali GTO",
+                marque: "Grotti",
+                type: "Sportive",
+                prix: 1965000,
+                image: "https://placehold.co/600x400/EF4444/FFFFFF?text=Itali+GTO", // Red background
+                description: "L'Itali GTO est une pure machine de course homologuée pour la route. Son agilité et sa vitesse de pointe en font un monstre sur l'asphalte.",
+                statistiques: { vitesseMax: 96, acceleration: 94, freinage: 88, tenueDeRoute: 92 },
+                customisations: [
+                    { nom: "Bandes Racing", options: ["Blanches", "Noires", "Tricolore Italien"], coutAdditionnel: 18000 },
+                    { nom: "Jantes Forgées", options: ["Modèle 'Leggera'", "Modèle 'Competizione'"], coutAdditionnel: 40000 },
+                ],
+                galerie: [
+                    "https://placehold.co/800x500/EF4444/FFFFFF?text=Itali+GTO+Vue+1",
+                ]
+            },
+            {
+                id: 4,
+                nom: "Declasse Yosemite Rancher",
+                marque: "Declasse",
+                type: "Tout-Terrain",
+                prix: 700000,
+                image: "https://placehold.co/600x400/F59E0B/FFFFFF?text=Yosemite+Rancher", // Amber background
+                description: "Robuste et imposant, le Yosemite Rancher est prêt à affronter tous les terrains. Parfait pour les aventuriers et ceux qui aiment dominer la route.",
+                statistiques: { vitesseMax: 70, acceleration: 65, freinage: 75, tenueDeRoute: 80 },
+                customisations: [
+                    { nom: "Pare-Buffle", options: ["Standard", "Renforcé"], coutAdditionnel: 15000 },
+                    { nom: "Suspension Surélevée", options: ["Haute", "Très Haute"], coutAdditionnel: 22000 },
+                    { nom: "Pneus Tout-Terrain", options: ["Crampons Larges", "Mud Terrain"], coutAdditionnel: 12000 },
+                ],
+                galerie: [
+                    "https://placehold.co/800x500/F59E0B/FFFFFF?text=Yosemite+Rancher+1",
+                    "https://placehold.co/800x500/D97706/FFFFFF?text=Yosemite+Rancher+2",
+                ]
+            },
+            {
+                id: 5,
+                nom: "Ocelot Pariah",
+                marque: "Ocelot",
+                type: "Sportive",
+                prix: 1420000,
+                image: "https://placehold.co/600x400/3B82F6/FFFFFF?text=Pariah", // Blue background
+                description: "La Pariah est réputée pour sa vitesse de pointe phénoménale, ce qui en fait l'une des voitures les plus rapides en ligne droite. Un classique pour les amateurs de vitesse.",
+                statistiques: { vitesseMax: 98, acceleration: 85, freinage: 78, tenueDeRoute: 82 },
+                customisations: [
+                    { nom: "Kit Aérodynamique", options: ["Type R", "Type S"], coutAdditionnel: 55000 },
+                ],
+                galerie: [
+                    "https://placehold.co/800x500/3B82F6/FFFFFF?text=Pariah",
+                ]
+            }
+        ];
+
+        // --- DOM Elements ---
+        const dealershipNameElement = document.getElementById('dealership-name');
+        const footerDealershipNameElement = document.getElementById('footer-dealership-name');
+        const vehicleListElement = document.getElementById('vehicle-list');
+        const modalElement = document.getElementById('vehicle-modal');
+        const modalContentElement = document.getElementById('modal-content');
+        const modalVehicleNameElement = document.getElementById('modal-vehicle-name');
+        const closeModalButton = document.getElementById('close-modal');
+        const filterBrandElement = document.getElementById('filter-brand');
+        const filterTypeElement = document.getElementById('filter-type');
+        const sortByElement = document.getElementById('sort-by');
+        const searchTermElement = document.getElementById('search-term');
+        const noResultsElement = document.getElementById('no-results');
+        const currentYearElement = document.getElementById('current-year');
+
+        // --- Utility Functions ---
+        function formatPrice(price) {
+            return price.toLocaleString('fr-FR', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).replace('USD', '$');
+        }
+
+        // --- Dealership Name Customization ---
+        // Permet de changer le nom du concessionnaire en cliquant dessus (simple démo)
+        dealershipNameElement.addEventListener('click', () => {
+            const newName = prompt("Entrez le nouveau nom de votre concessionnaire :", dealershipNameElement.textContent.trim());
+            if (newName && newName.trim() !== "") {
+                dealershipNameElement.textContent = newName.trim();
+                footerDealershipNameElement.textContent = newName.trim();
+                // Optionnel: sauvegarder dans localStorage pour persistance simple
+                // localStorage.setItem('dealershipName', newName.trim());
+            }
+        });
+        // Charger le nom depuis localStorage si existant
+        // const savedName = localStorage.getItem('dealershipName');
+        // if (savedName) {
+        //     dealershipNameElement.textContent = savedName;
+        //     footerDealershipNameElement.textContent = savedName;
+        // }
+
+
+        // --- Rendering Functions ---
+        function renderVehicleCard(vehicle) {
+            const card = document.createElement('div');
+            card.className = 'bg-gray-800 rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out flex flex-col';
+            card.innerHTML = `
+                <div class="w-full h-56 image-placeholder">
+                    <img src="${vehicle.image}" alt="${vehicle.nom}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML = '<ion-icon name=\\'image-outline\\'></ion-icon>'; this.style.display='none';">
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="text-xl font-semibold text-purple-300 mb-1">${vehicle.nom}</h3>
+                    <p class="text-sm text-gray-400 mb-3">${vehicle.marque} - ${vehicle.type}</p>
+                    <p class="text-2xl font-bold text-green-400 mb-4 mt-auto">${formatPrice(vehicle.prix)}</p>
+                    <button data-id="${vehicle.id}" class="view-details-btn mt-auto w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2.5 px-4 rounded-lg transition-colors shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+                        Voir les détails
+                    </button>
+                </div>
+            `;
+            card.querySelector('.view-details-btn').addEventListener('click', () => showVehicleDetails(vehicle.id));
+            return card;
+        }
+
+        function renderStatBar(label, value) {
+            // Value is a percentage (0-100)
+            return `
+                <div class="mb-2">
+                    <div class="flex justify-between text-sm text-gray-300 mb-1">
+                        <span>${label}</span>
+                        <span>${value}%</span>
+                    </div>
+                    <div class="h-3 w-full stat-bar-bg rounded-sm overflow-hidden">
+                        <div class="stat-bar-fill" style="width: 0%;" data-value="${value}"></div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function animateStatBars() {
+            // Animate bars when modal is shown
+            const statBars = modalContentElement.querySelectorAll('.stat-bar-fill');
+            statBars.forEach(bar => {
+                // Reset width to 0 then set to actual value for animation
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = `${bar.dataset.value}%`;
+                }, 100); // Small delay to ensure transition occurs
+            });
+        }
+
+        function renderVehicleDetails(vehicle) {
+            modalVehicleNameElement.textContent = vehicle.nom;
+            let galleryHTML = '';
+            if (vehicle.galerie && vehicle.galerie.length > 0) {
+                galleryHTML = `
+                    <div class="mb-6">
+                        <img src="${vehicle.galerie[0]}" alt="${vehicle.nom} - Image principale" class="w-full h-auto max-h-96 object-contain rounded-lg shadow-lg image-placeholder">
+                        </div>`;
+            } else {
+                 galleryHTML = `
+                    <div class="mb-6 w-full h-72 image-placeholder rounded-lg shadow-lg">
+                         <img src="${vehicle.image}" alt="${vehicle.nom}" class="w-full h-full object-cover rounded-lg" onerror="this.parentElement.innerHTML = '<ion-icon name=\\'image-outline\\'></ion-icon>'; this.style.display='none';">
+                    </div>`;
+            }
+
+            modalContentElement.innerHTML = `
+                ${galleryHTML}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h5 class="text-lg font-semibold text-purple-300 mb-2">Description</h5>
+                        <p class="text-gray-300 text-sm leading-relaxed">${vehicle.description}</p>
+                        
+                        <h5 class="text-lg font-semibold text-purple-300 mt-6 mb-2">Informations Clés</h5>
+                        <ul class="text-sm text-gray-300 space-y-1">
+                            <li><strong>Marque :</strong> ${vehicle.marque}</li>
+                            <li><strong>Type :</strong> ${vehicle.type}</li>
+                            <li class="text-xl"><strong>Prix :</strong> <span class="font-bold text-green-400">${formatPrice(vehicle.prix)}</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-lg font-semibold text-purple-300 mb-3">Statistiques</h5>
+                        ${renderStatBar('Vitesse Maximale', vehicle.statistiques.vitesseMax)}
+                        ${renderStatBar('Accélération', vehicle.statistiques.acceleration)}
+                        ${renderStatBar('Freinage', vehicle.statistiques.freinage)}
+                        ${renderStatBar('Tenue de Route', vehicle.statistiques.tenueDeRoute)}
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <h5 class="text-lg font-semibold text-purple-300 mb-3">Options de Customisation Disponibles</h5>
+                    ${vehicle.customisations && vehicle.customisations.length > 0 ? `
+                        <ul class="space-y-3 text-sm">
+                            ${vehicle.customisations.map(custo => `
+                                <li class="p-3 bg-gray-700/50 rounded-md">
+                                    <div class="font-medium text-gray-200">${custo.nom}</div>
+                                    ${custo.options && custo.options.length > 0 ? `<div class="text-xs text-gray-400 pl-2">- ${custo.options.join('<br>- ')}</div>` : ''}
+                                    ${custo.coutAdditionnel ? `<div class="text-xs text-green-400 pl-2 mt-1">+ ${formatPrice(custo.coutAdditionnel)}</div>` : ''}
+                                </li>
+                            `).join('')}
+                        </ul>
+                    ` : '<p class="text-gray-400 text-sm">Aucune customisation spécifique listée pour ce modèle.</p>'}
+                </div>
+            `;
+            animateStatBars();
+        }
+
+        function displayVehicles(vehiclesToDisplay) {
+            vehicleListElement.innerHTML = ''; // Clear existing vehicles
+            if (vehiclesToDisplay.length === 0) {
+                noResultsElement.classList.remove('hidden');
+            } else {
+                noResultsElement.classList.add('hidden');
+                vehiclesToDisplay.forEach(vehicle => {
+                    vehicleListElement.appendChild(renderVehicleCard(vehicle));
+                });
+            }
+        }
+
+        // --- Modal Logic ---
+        function showVehicleDetails(vehicleId) {
+            const vehicle = vehiclesData.find(v => v.id === vehicleId);
+            if (vehicle) {
+                renderVehicleDetails(vehicle);
+                modalElement.classList.remove('hidden');
+                setTimeout(() => modalElement.classList.add('opacity-100'), 10); // For transition
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+        }
+
+        function closeModal() {
+            modalElement.classList.remove('opacity-100');
+            setTimeout(() => {
+                modalElement.classList.add('hidden');
+                document.body.style.overflow = 'auto'; // Restore background scrolling
+            }, 300); // Match transition duration
+        }
+
+        // --- Filtering and Sorting Logic ---
+        function populateFilters() {
+            const brands = [...new Set(vehiclesData.map(v => v.marque))].sort();
+            const types = [...new Set(vehiclesData.map(v => v.type))].sort();
+
+            brands.forEach(brand => {
+                const option = document.createElement('option');
+                option.value = brand;
+                option.textContent = brand;
+                filterBrandElement.appendChild(option);
+            });
+
+            types.forEach(type => {
+                const option = document.createElement('option');
+                option.value = type;
+                option.textContent = type;
+                filterTypeElement.appendChild(option);
+            });
+        }
+
+        function filterAndSortVehicles() {
+            let filteredVehicles = [...vehiclesData];
+            const brand = filterBrandElement.value;
+            const type = filterTypeElement.value;
+            const sortOrder = sortByElement.value;
+            const searchTerm = searchTermElement.value.toLowerCase();
+
+            // Filter by brand
+            if (brand) {
+                filteredVehicles = filteredVehicles.filter(v => v.marque === brand);
+            }
+            // Filter by type
+            if (type) {
+                filteredVehicles = filteredVehicles.filter(v => v.type === type);
+            }
+            // Filter by search term
+            if (searchTerm) {
+                filteredVehicles = filteredVehicles.filter(v => v.nom.toLowerCase().includes(searchTerm) || v.marque.toLowerCase().includes(searchTerm));
+            }
+
+            // Sort
+            switch (sortOrder) {
+                case 'name-asc':
+                    filteredVehicles.sort((a, b) => a.nom.localeCompare(b.nom));
+                    break;
+                case 'name-desc':
+                    filteredVehicles.sort((a, b) => b.nom.localeCompare(a.nom));
+                    break;
+                case 'price-asc':
+                    filteredVehicles.sort((a, b) => a.prix - b.prix);
+                    break;
+                case 'price-desc':
+                    filteredVehicles.sort((a, b) => b.prix - a.prix);
+                    break;
+                // Default: no specific sort or by ID if needed
+            }
+            displayVehicles(filteredVehicles);
+        }
+
+        // --- Event Listeners ---
+        closeModalButton.addEventListener('click', closeModal);
+        modalElement.addEventListener('click', (event) => { // Close on backdrop click
+            if (event.target === modalElement) {
+                closeModal();
+            }
+        });
+        document.addEventListener('keydown', (event) => { // Close on Escape key
+            if (event.key === 'Escape' && !modalElement.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        filterBrandElement.addEventListener('change', filterAndSortVehicles);
+        filterTypeElement.addEventListener('change', filterAndSortVehicles);
+        sortByElement.addEventListener('change', filterAndSortVehicles);
+        searchTermElement.addEventListener('input', filterAndSortVehicles);
+
+
+        // --- Initialization ---
+        function init() {
+            // Set current year in footer
+            currentYearElement.textContent = new Date().getFullYear();
+            
+            // Initial display of vehicles
+            populateFilters();
+            filterAndSortVehicles(); // Display all vehicles initially
+            
+            // Load dealership name from localStorage if you implement that feature
+            // const savedDealershipName = localStorage.getItem('dealershipName');
+            // if (savedDealershipName) {
+            //    dealershipNameElement.textContent = savedDealershipName;
+            //    footerDealershipNameElement.textContent = savedDealershipName;
+            // }
+        }
+
+        // Run initialization when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+</html>
